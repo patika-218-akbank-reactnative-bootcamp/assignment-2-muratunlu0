@@ -1,13 +1,14 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import TopBar from './components/TopBar';
-import Title from './components/Tabs';
+import Tabs from './components/Tabs';
 import Chats from './components/Chats';
 
 const App = () => {
   return (
     <View>
       <TopBar />
+      <Tabs />
     </View>
   );
 };
