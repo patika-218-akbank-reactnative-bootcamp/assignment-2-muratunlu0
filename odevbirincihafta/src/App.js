@@ -9,6 +9,13 @@ const App = () => {
     <View>
       <TopBar />
       <Tabs />
+      <ScrollView
+        alwaysBounceVertical={false}
+        showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior="automatic"
+        style={styles.scrollView}>
+        <Chats />
+      </ScrollView>
     </View>
   );
 };
