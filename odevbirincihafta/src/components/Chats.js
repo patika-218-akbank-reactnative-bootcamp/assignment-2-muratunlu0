@@ -1,6 +1,4 @@
 import React from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-
 import {View, Text, Pressable, Image, StyleSheet} from 'react-native';
 
 const chatList = [
