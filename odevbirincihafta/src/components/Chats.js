@@ -1,108 +1,19 @@
 import React from 'react';
 import {View, Text, Pressable, Image, StyleSheet} from 'react-native';
 
-const chatList = [
-  {
-    sender: {
-      firstName: 'Esra',
-      lastName: 'Yılmaz',
-    },
-    messages: [
-      {
-        text: 'kanka yarın buluşuyoruzz 😎',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'heyy Muraad',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'kanka yarın buluşuyoruzz 😎',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'kanka yarın buluşuyoruzz 😎',
-        timestamp: '53125632456342',
-      },
-    ],
-  },
-  {
-    sender: {
-      firstName: 'Berk',
-      lastName: 'Deniz',
-    },
-    messages: [
-      {
-        text: 'Okulu kafaya takmamak lazım',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'heyy Muraad 2',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'Okulu kafaya takmamak lazım',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'Okulu kafaya takmamak lazım',
-        timestamp: '53125632456342',
-      },
-    ],
-  },
-  {
-    sender: {
-      firstName: 'Ponçik',
-      lastName: 'Bayan',
-    },
-    messages: [
-      {
-        text: 'Yeni insanları tanımak...',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'heyy Muraad 3',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'Yeni insanları tanımak...',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'Yeni insanları tanımak...',
-        timestamp: '53125632456342',
-      },
-    ],
-  },
-  {
-    sender: {
-      firstName: 'Zeynep',
-      lastName: 'Çiçek',
-    },
-    messages: [
-      {
-        text: 'Kızgın değilim 😤',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'heyy Muraad 4',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'Kızgın değilim 😤',
-        timestamp: '53125632456342',
-      },
-      {
-        text: 'Kızgın değilim 😤',
-        timestamp: '53125632456342',
-      },
-    ],
-  },
-];
+import ChatList from './ChatList';
 
-const UserChatButton = ({user, message, Date}) => {
+const UserChatButton = ({navigation, user, message, Date, id}) => {
   return (
-    <Pressable style={styles.Pressable}>
+    <Pressable
+      style={styles.Pressable}
+      onPress={() => {
+        /* 1. Navigate to the Details route with params */
+        navigation.navigate('Message', {
+          itemId: id,
+          otherParam: 'anything you want here',
+        });
+      }}>
       <View style={styles.view}>
         <View style={styles.view2}>
           <View style={styles.row}>
@@ -124,48 +35,52 @@ const UserChatButton = ({user, message, Date}) => {
   );
 };
 
-const Chats = () => {
+const Chats = ({navigation}) => {
   return (
     <View style={styles.view13}>
       <UserChatButton
         user={{
           nickname:
-            chatList[0].sender.firstName + ' ' + chatList[0].sender.lastName,
-          imageUrl:
-            'https://img.wattpad.com/04ad7d37f06664571ea6476267ec0fe74e0346da/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f64774f52477064625072726b35673d3d2d38362e313537376134323366373833383934343531323432303631373430342e6a7067?s=fit&w=720&h=720',
+            ChatList[0].sender.firstName + ' ' + ChatList[0].sender.lastName,
+          imageUrl: ChatList[0].sender.profileImage,
         }}
-        Date="7:27 PM"
-        message={chatList[0].messages[chatList[0].messages.length - 1].text}
+        navigation={navigation}
+        id={0}
+        Date={ChatList[0].messages[ChatList[0].messages.length - 1].date}
+        message={ChatList[0].messages[ChatList[0].messages.length - 1].text}
       />
       <UserChatButton
         user={{
           nickname:
-            chatList[1].sender.firstName + ' ' + chatList[1].sender.lastName,
-          imageUrl:
-            'https://foto.haberler.com/galeri/2017/11/01/instagram-in-siradisi-fenomenleri-710426_4267_70_b.jpg',
+            ChatList[1].sender.firstName + ' ' + ChatList[1].sender.lastName,
+          imageUrl: ChatList[1].sender.profileImage,
         }}
-        Date="5:38 PM"
-        message={chatList[1].messages[chatList[1].messages.length - 1].text}
+        navigation={navigation}
+        id={1}
+        Date={ChatList[1].messages[ChatList[1].messages.length - 1].date}
+        message={ChatList[1].messages[ChatList[1].messages.length - 1].text}
       />
       <UserChatButton
         user={{
           nickname:
-            chatList[2].sender.firstName + ' ' + chatList[2].sender.lastName,
-          imageUrl:
-            'https://galeri13.uludagsozluk.com/726/sozluk-yazarlarinin-asik-oldugu-kiz-tipi_1873752.jpg',
+            ChatList[2].sender.firstName + ' ' + ChatList[2].sender.lastName,
+          imageUrl: ChatList[2].sender.profileImage,
         }}
-        Date="3:36 PM"
-        message={chatList[2].messages[chatList[2].messages.length - 1].text}
+        navigation={navigation}
+        id={2}
+        Date={ChatList[2].messages[ChatList[2].messages.length - 1].date}
+        message={ChatList[2].messages[ChatList[2].messages.length - 1].text}
       />
       <UserChatButton
         user={{
           nickname:
-            chatList[3].sender.firstName + ' ' + chatList[3].sender.lastName,
-          imageUrl:
-            'https://i.pinimg.com/736x/bf/f1/1d/bff11de83086515bdf280818ec8c3458.jpg',
+            ChatList[3].sender.firstName + ' ' + ChatList[3].sender.lastName,
+          imageUrl: ChatList[3].sender.profileImage,
         }}
-        Date="1:17 PM"
-        message={chatList[3].messages[chatList[3].messages.length - 1].text}
+        navigation={navigation}
+        id={3}
+        Date={ChatList[3].messages[ChatList[3].messages.length - 1].date}
+        message={ChatList[3].messages[ChatList[3].messages.length - 1].text}
       />
     </View>
   );

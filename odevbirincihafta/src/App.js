@@ -1,10 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TopBar from './components/TopBar';
 import Tabs from './components/Tabs';
 import Chats from './components/Chats';
+import MessagePanel from './components/MessagePanel';
 
-const App = () => {
+function HomeScreen({navigation}) {
   return (
     <View>
       <TopBar />
@@ -14,11 +17,13 @@ const App = () => {
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
-        <Chats />
+        <Chats navigation={navigation} />
       </ScrollView>
     </View>
   );
-};
+}
+
+const Stack = createNativeStackNavigator();
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -59,4 +64,21 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Message"
+          component={MessagePanel}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
